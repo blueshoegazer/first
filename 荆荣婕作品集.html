@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>荆荣婕 · 作品集</title>
+<style>
+:root{
+  --ink:#0b0b0d; --paper:#f4f1ea; --gold:#c9a96e; --gold2:#e6cf9f;
+  --red:#7a1420; --red2:#b23a2e; --green:#5f7d5a; --line:rgba(255,255,255,.12);
+  --sans:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --serif:"Songti SC","STSong","SimSun",Georgia,serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--ink);color:#e9e6df;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--gold);color:#000}
+
+/* 顶部导航 */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;
+  padding:16px clamp(18px,4vw,52px);mix-blend-mode:difference;pointer-events:none}
+#topbar>*{pointer-events:auto}
+#brand{font-family:var(--serif);font-size:15px;letter-spacing:3px;cursor:pointer}
+#nav{display:flex;gap:22px;font-size:12px;letter-spacing:2px}
+#nav span{cursor:pointer;opacity:.55;transition:opacity .3s;position:relative}
+#nav span.on,#nav span:hover{opacity:1}
+#nav span::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:#fff;transition:width .35s}
+#nav span.on::after{width:100%}
+
+/* 视图切换 */
+.view{display:none;min-height:100vh;animation:fade .7s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ===== 首页 ===== */
+#home{position:relative}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(18px,6vw,90px);position:relative;overflow:hidden}
+.hero .ghost{position:absolute;right:-2vw;top:50%;transform:translateY(-50%);font-family:var(--serif);
+  font-size:clamp(120px,30vw,420px);color:rgba(255,255,255,.028);letter-spacing:-.04em;white-space:nowrap;pointer-events:none;user-select:none}
+.hero .kicker{font-size:12px;letter-spacing:6px;color:var(--gold);margin-bottom:26px;opacity:0;animation:up .8s .2s forwards}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(48px,10vw,132px);line-height:.98;letter-spacing:.02em;opacity:0;animation:up .8s .35s forwards}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .sub{margin-top:28px;font-size:14px;letter-spacing:2px;color:#cfc9bd;opacity:0;animation:up .8s .5s forwards}
+.hero .sub i{font-style:normal;color:var(--gold);margin:0 10px}
+.hero .meta{margin-top:34px;display:flex;gap:28px;flex-wrap:wrap;font-size:12px;letter-spacing:1px;color:#8a857b;opacity:0;animation:up .8s .62s forwards}
+.hero .meta b{color:#d8d3c8;font-weight:500}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.scrollcue{position:absolute;bottom:30px;left:clamp(18px,6vw,90px);font-size:11px;letter-spacing:3px;color:#7a756b;display:flex;align-items:center;gap:12px}
+.scrollcue i{display:block;width:40px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);animation:cue 2s infinite}
+@keyframes cue{0%,100%{transform:scaleX(.4);opacity:.4}50%{transform:scaleX(1);opacity:1}}
+
+/* 三入口卡片 */
+.entries{padding:clamp(60px,10vw,120px) clamp(18px,6vw,90px) 120px;display:flex;flex-direction:column;gap:clamp(20px,3vw,40px)}
+.entry{position:relative;display:grid;grid-template-columns:1fr;gap:0;min-height:clamp(320px,52vh,560px);
+  border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:border-color .5s;background:#0d0d10}
+.entry:hover{border-color:var(--gold)}
+.entry .bg{position:absolute;inset:0;opacity:.32;transition:opacity .8s,transform 1.2s;transform:scale(1.04)}
+.entry:hover .bg{opacity:.5;transform:scale(1.0)}
+.entry .bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.05)}
+.entry .scrim{position:absolute;inset:0;background:linear-gradient(105deg,rgba(6,6,8,.94) 0%,rgba(6,6,8,.7) 42%,rgba(6,6,8,.15) 100%)}
+.entry .body{position:relative;z-index:2;padding:clamp(28px,5vw,64px);display:flex;flex-direction:column;justify-content:flex-end;min-height:inherit}
+.entry .no{font-family:var(--serif);font-size:13px;letter-spacing:4px;color:var(--gold);margin-bottom:auto}
+.entry h2{font-family:var(--serif);font-size:clamp(30px,5.4vw,62px);font-weight:600;letter-spacing:.03em;line-height:1.05}
+.entry .en{font-size:12px;letter-spacing:5px;color:#8f8a80;margin-top:10px;text-transform:uppercase}
+.entry p{margin-top:18px;max-width:520px;font-size:14px;line-height:1.85;color:#b4afa5}
+.entry .tags{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.entry .tags i{font-style:normal;font-size:11px;letter-spacing:1px;color:#cfcabf;border:1px solid rgba(255,255,255,.16);padding:5px 12px;border-radius:40px}
+.entry .go{position:absolute;top:clamp(24px,4vw,48px);right:clamp(24px,4vw,48px);width:52px;height:52px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:.5s}
+.entry:hover .go{background:var(--gold);border-color:var(--gold);transform:rotate(-45deg)}
+.entry .go svg{width:20px;height:20px;stroke:#fff;stroke-width:1.5;fill:none}
+.entry:hover .go svg{stroke:#111}
+
+/* ===== 通用内页头部 ===== */
+.page-head{padding:clamp(120px,18vh,180px) clamp(18px,6vw,90px) clamp(40px,6vw,70px);position:relative}
+.page-head .back{font-size:12px;letter-spacing:2px;color:#8a857b;cursor:pointer;display:inline-flex;gap:8px;align-items:center;margin-bottom:30px;transition:color .3s}
+.page-head .back:hover{color:var(--gold)}
+.page-head .kick{font-size:12px;letter-spacing:6px;color:var(--gold);margin-bottom:18px}
+.page-head h2{font-family:var(--serif);font-size:clamp(34px,6vw,72px);font-weight:600;letter-spacing:.02em;line-height:1.05}
+.page-head .lead{margin-top:22px;max-width:680px;font-size:15px;line-height:1.95;color:#b4afa5}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:0 clamp(18px,6vw,90px)}
+
+/* 区块 */
+.sec{padding:clamp(50px,8vw,96px) clamp(18px,6vw,90px)}
+.sec-h{display:flex;align-items:baseline;gap:18px;margin-bottom:34px}
+.sec-h .idx{font-family:var(--serif);font-size:14px;color:var(--gold);letter-spacing:2px}
+.sec-h h3{font-family:var(--serif);font-size:clamp(22px,3.4vw,34px);font-weight:600;letter-spacing:.02em}
+.sec-h .en{font-size:11px;letter-spacing:4px;color:#7d786e;text-transform:uppercase;margin-left:auto}
+.sec-desc{max-width:720px;font-size:14.5px;line-height:1.95;color:#a8a399;margin-bottom:36px}
+
+/* 成果数据条 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:40px}
+.stats .s{background:#0d0d10;padding:26px 24px;text-align:center}
+.stats .s b{display:block;font-family:var(--serif);font-size:clamp(26px,3.6vw,40px);color:var(--gold2);letter-spacing:1px;line-height:1.1}
+.stats .s span{display:block;margin-top:10px;font-size:12px;letter-spacing:2px;color:#8f8a80}
+
+/* 价值点 */
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.values .v{background:#0d0d10;padding:28px 26px}
+.values .v b{display:block;font-family:var(--serif);font-size:18px;color:var(--gold2);margin-bottom:12px;letter-spacing:1px}
+.values .v p{font-size:13.5px;line-height:1.85;color:#a29d93}
+
+/* 图片画廊 */
+.gal{display:grid;gap:14px}
+.gal.two{grid-template-columns:repeat(2,1fr)}
+.gal.three{grid-template-columns:repeat(3,1fr)}
+.gal.four{grid-template-columns:repeat(4,1fr)}
+.gal figure{position:relative;overflow:hidden;background:#111;border:1px solid rgba(255,255,255,.06)}
+.gal figure img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .6s;filter:saturate(.92)}
+.gal figure:hover img{transform:scale(1.06);filter:saturate(1.05)}
+.gal figure figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;font-size:11.5px;letter-spacing:1px;color:#e9e6df;
+  background:linear-gradient(0deg,rgba(6,6,8,.86),transparent);opacity:0;transform:translateY(8px);transition:.4s}
+.gal figure:hover figcaption{opacity:1;transform:none}
+.gal .tall{aspect-ratio:3/4}
+.gal .wide{aspect-ratio:16/10}
+.gal .sq{aspect-ratio:1/1}
+.gal .p34{aspect-ratio:3/4}
+.gal .contain img{object-fit:contain;background:#000}
+.span2{grid-column:span 2}
+
+/* 展板大图 */
+.board{border:1px solid var(--line);background:#000;margin-bottom:26px;overflow:hidden}
+.board img{width:100%;height:auto;display:block}
+.board .cap{padding:12px 18px;font-size:12px;letter-spacing:1.5px;color:#a8a399;border-top:1px solid var(--line);background:#0d0d10}
+
+/* 图文并排 */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center}
+.split.rev{grid-template-columns:.95fr 1.05fr}
+.split .txt h4{font-family:var(--serif);font-size:clamp(20px,2.8vw,28px);margin-bottom:16px;letter-spacing:.02em}
+.split .txt p{font-size:14px;line-height:1.95;color:#a8a399;margin-bottom:14px}
+.split .txt ul{list-style:none;margin-top:8px}
+.split .txt li{font-size:13.5px;line-height:1.7;color:#9c978d;padding-left:20px;position:relative;margin-bottom:8px}
+.split .txt li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--gold)}
+.split .pic{border:1px solid var(--line);overflow:hidden;background:#111}
+.split .pic img{width:100%;height:100%;object-fit:cover}
+
+/* 产品卡 */
+.prod{border:1px solid var(--line);background:#0d0d10;margin-bottom:26px;overflow:hidden}
+.prod .info{padding:clamp(22px,3vw,38px)}
+.prod .info .tag{font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:12px}
+.prod .info h4{font-family:var(--serif);font-size:clamp(20px,2.6vw,28px);margin-bottom:6px}
+.prod .info .en{font-size:11px;letter-spacing:3px;color:#7d786e;margin-bottom:16px;text-transform:uppercase}
+.prod .info p{font-size:14px;line-height:1.9;color:#a29d93;max-width:760px}
+.chips{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.chips i{font-style:normal;font-size:11px;color:#cfcabf;border:1px solid rgba(255,255,255,.14);padding:4px 11px;border-radius:40px}
+
+/* AI 标注徽章 */
+.aibadge{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold);background:rgba(201,169,110,.08);
+  padding:12px 20px;margin-bottom:26px;font-size:13px;letter-spacing:1px;color:var(--gold2)}
+.aibadge b{font-family:var(--serif);font-size:15px;letter-spacing:2px}
+
+/* 概念卡（无图项目） */
+.concept{border:1px dashed rgba(201,169,110,.5);background:linear-gradient(160deg,rgba(201,169,110,.05),transparent 60%);
+  padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,44px);align-items:center}
+.concept .l .tag{font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:12px}
+.concept .l h4{font-family:var(--serif);font-size:clamp(22px,3vw,32px);margin-bottom:6px}
+.concept .l .en{font-size:11px;letter-spacing:3px;color:#7d786e;text-transform:uppercase;margin-bottom:18px}
+.concept .r p{font-size:14px;line-height:1.95;color:#a8a399;margin-bottom:12px}
+.concept .flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.concept .flow span{font-size:12px;letter-spacing:1px;color:#e6cf9f;border:1px solid rgba(201,169,110,.45);padding:8px 14px;border-radius:40px;background:rgba(201,169,110,.06)}
+.concept .flow i{font-style:normal;color:var(--gold);font-size:14px}
+
+/* 页脚 */
+#foot{padding:70px clamp(18px,6vw,90px) 50px;border-top:1px solid var(--line);text-align:center}
+#foot .fm{font-family:var(--serif);font-size:clamp(20px,3vw,30px);letter-spacing:2px;margin-bottom:14px}
+#foot p{font-size:12px;letter-spacing:2px;color:#7d786e}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+
+/* 灯箱 */
+#lb{position:fixed;inset:0;z-index:2000;background:rgba(4,4,6,.96);display:none;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+#lb.on{display:flex;animation:fade .3s}
+#lb img{max-width:94%;max-height:92%;object-fit:contain;box-shadow:0 30px 120px rgba(0,0,0,.6)}
+#lb .cap{position:absolute;bottom:24px;left:0;right:0;text-align:center;font-size:12px;letter-spacing:2px;color:#c9c4ba}
+
+@media(max-width:820px){
+  .split,.split.rev,.concept{grid-template-columns:1fr}
+  .gal.three,.gal.four{grid-template-columns:repeat(2,1fr)}
+  .entry .scrim{background:linear-gradient(0deg,rgba(6,6,8,.95) 20%,rgba(6,6,8,.4) 70%,rgba(6,6,8,.2))}
+  #nav{gap:14px}
+  .hero .ghost{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div id="brand" onclick="go('home')">荆荣婕 · JING RONGJIE</div>
+  <div id="nav">
+    <span data-v="home" onclick="go('home')">首页</span>
+    <span data-v="biz" onclick="go('biz')">创业经历</span>
+    <span data-v="prod" onclick="go('prod')">产品项目</span>
+    <span data-v="vis" onclick="go('vis')">视觉设计</span>
+  </div>
+</div>
+
+<!-- ============ 首页 ============ -->
+<section class="view on" id="home">
+  <div class="hero">
+    <div class="ghost">PORTFOLIO</div>
+    <div class="kicker">INDUSTRIAL DESIGN · BRAND · VISUAL</div>
+    <h1>荆荣婕<br><em>作品集</em></h1>
+    <div class="sub">国家奖学金<i>·</i>商业创业经历<i>·</i>关注人机交互设计</div>
+    <div class="meta">
+      <div><b>西安交通大学</b><br>2027 届 · 本科</div>
+      <div><b>机械工程学院</b><br>工业设计专业 · 成绩排名前 30%</div>
+      <div><b>GRAP × 设计思维</b><br>从品牌、产品到视觉的完整链路</div>
+    </div>
+    <div class="scrollcue">向下探索 <i></i></div>
+  </div>
+
+  <div class="entries">
+    <div class="entry rv" onclick="go('biz')">
+      <div class="bg"><img src="https://workspace-cdn.uzone.com/da9b19bbecc54e9a84f9caad2e1cd3b6%2Fo%2F1789883758757-c.jpg?auth_key=1792637107-0-0-77ec6cf8b747724c5d65dc05a49e2b60"></div>
+      <div class="scrim"></div>
+      <div class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="body">
+        <div class="no">01 / 创业经历</div>
+        <h2>黑幻想</h2>
+        <div class="en">Black Fantasy · Founder & Design Lead</div>
+        <p>一间为"被看见"而生的主题空间。从品牌核心价值到空间、商业、视觉与宣发，完整操盘一个情感消费品牌。累计流水 50w+。</p>
+        <div class="tags"><i>品牌核心价值</i><i>空间设计</i><i>商业策划</i><i>视觉设计</i><i>自媒体宣发</i></div>
+      </div>
+    </div>
+
+    <div class="entry rv" onclick="go('prod')">
+      <div class="bg"><img src="https://workspace-cdn.uzone.com/59348f3d5b774651a017422e3e8f193a%2Fo%2F1789883901870-c.jpg?auth_key=1792637119-0-0-87abc28923c22ce95b5e33283532ee22"></div>
+      <div class="scrim"></div>
+      <div class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="body">
+        <div class="no">02 / 产品项目</div>
+        <h2>产品与体验</h2>
+        <div class="en">Product & Experience Design</div>
+        <p>智能助老机器人、食愈手环与 Cuddle 仿生按摩仪、捕梦网——从洞察、定义到展板与建模渲染的四个完整设计。</p>
+        <div class="tags"><i>产品定义</i><i>展板</i><i>3D 建模</i><i>AI 交互</i></div>
+      </div>
+    </div>
+
+    <div class="entry rv" onclick="go('vis')">
+      <div class="bg"><img src="https://workspace-cdn.uzone.com/45b0dfab408f4e18a186598164d36e4f%2Fo%2F1789883317430-c.jpg?auth_key=1792637122-0-0-f0150b037f65b32f6c247e27c75a0e70"></div>
+      <div class="scrim"></div>
+      <div class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+      <div class="body">
+        <div class="no">03 / 视觉设计</div>
+        <h2>海报 · 品牌 · 影像</h2>
+        <div class="en">Poster · Branding · Photography</div>
+        <p>观念海报、SheCrafts 品牌视觉系统、AI 工作流商业摄影与运动纪实影像。</p>
+        <div class="tags"><i>海报</i><i>品牌 VI</i><i>AI 商业摄影</i><i>纪实摄影</i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 创业经历 · 黑幻想 ============ -->
+<section class="view" id="biz">
+  <div class="page-head">
+    <div class="back" onclick="go('home')">← 返回</div>
+    <div class="kick">01 — FOUNDER · DESIGN LEAD</div>
+    <h2>黑幻想 <span style="color:var(--red2)">Black Fantasy</span></h2>
+    <div class="lead">一间面向当代年轻人的主题空间品牌。以"被看见"为内核，用一场问卷、一次深夜对话、一杯酒和一屋子烛光，回应一群"活人味儿"无处安放的灵魂。我在这里主导品牌从 0 到 1 的核心价值、空间、商业、视觉与宣发。</div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">1.1</span><h3>品牌核心价值</h3><span class="en">Brand Core Value</span></div>
+    <div class="sec-desc">用 GRAP 框架完成从共情到验证的推演：共情"微死感"的年轻人、缺失主体性的女性、认知空白的圈层新人；定义核心命题——<b style="color:var(--gold2)">现代年轻人需要被看见，需要 deep talk 去认清、成为、认可自己；需要真实、活力与艺术。</b></div>
+    <div class="values rv">
+      <div class="v"><b>被看见</b><p>无处倾诉、无人认可的年轻人，需要一个被认真对待的场域。</p></div>
+      <div class="v"><b>认清自己</b><p>以"富有人味"的心理问卷为入口，量化情绪、生成身份认同。</p></div>
+      <div class="v"><b>真实关系</b><p>反"无味恋爱/低质量社交"，主张真诚、有活力的深度交流。</p></div>
+      <div class="v"><b>艺术表达</b><p>把摄影、文学、展览与创造力玩法纳入空间叙事。</p></div>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">1.2</span><h3>空间设计</h3><span class="en">Spatial Design</span></div>
+    <div class="sec-desc">主题空间以红黑紫为基调，烛光、霓虹与暗调氛围交织。品牌标识灯箱、羽毛灯与丝绒沙发构成"剧场之夜"的情绪容器，让空间本身成为叙事的一部分。</div>
+    <div class="gal three rv">
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/a4f56ec25f924098ae68fabdd6d56ffa%2Fo%2F1789883757936-c.jpg?auth_key=1792637106-0-0-8a4287623fda985b017d6202123d9f91" data-full="https://workspace-cdn.uzone.com/a4f56ec25f924098ae68fabdd6d56ffa%2Fo%2F1789883757936-c.jpg?auth_key=1792637106-0-0-8a4287623fda985b017d6202123d9f91"><figcaption>品牌灯箱 · 黑幻想 BLACK FANTASY</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/da9b19bbecc54e9a84f9caad2e1cd3b6%2Fo%2F1789883758757-c.jpg?auth_key=1792637107-0-0-77ec6cf8b747724c5d65dc05a49e2b60" data-full="https://workspace-cdn.uzone.com/da9b19bbecc54e9a84f9caad2e1cd3b6%2Fo%2F1789883758757-c.jpg?auth_key=1792637107-0-0-77ec6cf8b747724c5d65dc05a49e2b60"><figcaption>紫调休息室 · 羽毛灯与丝绒</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/fe727d51ddea4fba9fb6ebbc904b2628%2Fo%2F1789883768543-c.jpg?auth_key=1792637108-0-0-e319f618319e6adb4aaa006e7880c782" data-full="https://workspace-cdn.uzone.com/fe727d51ddea4fba9fb6ebbc904b2628%2Fo%2F1789883768543-c.jpg?auth_key=1792637108-0-0-e319f618319e6adb4aaa006e7880c782"><figcaption>霓虹标语 · PLAY DIRTY LOVE DEEP</figcaption></figure>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">1.3</span><h3>商业策划</h3><span class="en">Business Planning</span></div>
+    <div class="stats rv">
+      <div class="s"><b>50w+</b><span>累计流水</span></div>
+      <div class="s"><b>400+</b><span>消费人次</span></div>
+      <div class="s"><b>10+</b><span>对外合作</span></div>
+      <div class="s"><b>15%</b><span>导流专业情感咨询转化率</span></div>
+    </div>
+    <div class="split rv">
+      <div class="txt">
+        <p>以问卷为流量入口、社群为留存池、空间玩法与创造力产品为变现层，构建"引流—归属—消费"的闭环，并向专业情感咨询导流。</p>
+        <ul>
+          <li>黑幻想问卷：满足好奇与自我认知，沉淀样本数据与方法论</li>
+          <li>社群建立：高质量有趣人类聚集，提供情绪价值与归属感</li>
+          <li>创造力产品：酒品、主题菜单、艺术展览与限定活动</li>
+          <li>OGSM 分析：直面获客与转化障碍，持续迭代运营策略</li>
+        </ul>
+        <div class="chips"><i>项目成果 · 流水 50w+</i><i>消费人次 400 余人</i><i>对外合作十余次</i><i>情感咨询导流转化 15%</i></div>
+      </div>
+      <div class="pic"><img src="https://workspace-cdn.uzone.com/8ceea70a78534a9dab0f30c14aa5fe66%2Fo%2F1789883334208-c.jpg?auth_key=1792637115-0-0-c10ae49ce5e00cc0d4d32550fdcf18ad" data-full="https://workspace-cdn.uzone.com/8ceea70a78534a9dab0f30c14aa5fe66%2Fo%2F1789883334208-c.jpg?auth_key=1792637115-0-0-c10ae49ce5e00cc0d4d32550fdcf18ad" style="aspect-ratio:4/3"></div>
+    </div>
+    <div class="board rv" style="margin-top:26px">
+      <img src="https://workspace-cdn.uzone.com/09c8de62afe548e285d037153713135e%2Fo%2F1790053144181-c.jpg?auth_key=1792645144-0-0-09b4913c560f7f45918f88f67c7abaaa" data-full="https://workspace-cdn.uzone.com/09c8de62afe548e285d037153713135e%2Fo%2F1790053144181-c.jpg?auth_key=1792645144-0-0-09b4913c560f7f45918f88f67c7abaaa" style="object-fit:contain;background:#f7b7c8" loading="lazy">
+      <div class="cap">黑幻想设计旅程 · GRAP 全链路思维导图（点击放大）</div>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">1.4</span><h3>视觉设计</h3><span class="en">Visual Identity</span></div>
+    <div class="sec-desc">品牌标识、宣言卡片与菜单物料体系：黑红金配色、哥特花体与衬线字，营造神秘、性感而有质感的品牌气质。</div>
+    <div class="gal two rv">
+      <figure class="wide contain"><img src="https://workspace-cdn.uzone.com/8e890600d518450e9e9edea17be0a2d6%2Fo%2F1789883326221-c.jpg?auth_key=1792637114-0-0-6621893cd630144428b898d843959e00" data-full="https://workspace-cdn.uzone.com/8e890600d518450e9e9edea17be0a2d6%2Fo%2F1789883326221-c.jpg?auth_key=1792637114-0-0-6621893cd630144428b898d843959e00"><figcaption>酒水单封面 · 品牌关键词体系</figcaption></figure>
+      <figure class="wide contain"><img src="https://workspace-cdn.uzone.com/1578dc657e864b769e6e788f12d62b73%2Fo%2F1789883350624-c.jpg?auth_key=1792637113-0-0-4c80db427eac9b6aff5dca33dfa96ef0" data-full="https://workspace-cdn.uzone.com/1578dc657e864b769e6e788f12d62b73%2Fo%2F1789883350624-c.jpg?auth_key=1792637113-0-0-4c80db427eac9b6aff5dca33dfa96ef0"><figcaption>冬季小食单 · 图文版式</figcaption></figure>
+    </div>
+    <div class="gal two rv" style="margin-top:14px">
+      <figure class="wide contain"><img src="https://workspace-cdn.uzone.com/4548266666924586ac456db8a4432542%2Fo%2F1789883334120-c.jpg?auth_key=1792637118-0-0-c0952b6658919230fa0da80e7fcbe6fa" data-full="https://workspace-cdn.uzone.com/4548266666924586ac456db8a4432542%2Fo%2F1789883334120-c.jpg?auth_key=1792637118-0-0-c0952b6658919230fa0da80e7fcbe6fa"><figcaption>折页菜单 · 实物印刷</figcaption></figure>
+      <figure class="wide contain"><img src="https://workspace-cdn.uzone.com/628c36d59d7b435c823454f75b82d69f%2Fo%2F1789883306444-c.jpg?auth_key=1792637117-0-0-a1dee3499c734381aa31979eb7d95611" data-full="https://workspace-cdn.uzone.com/628c36d59d7b435c823454f75b82d69f%2Fo%2F1789883306444-c.jpg?auth_key=1792637117-0-0-a1dee3499c734381aa31979eb7d95611"><figcaption>万圣节限定 · 酒水单</figcaption></figure>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">1.5</span><h3>自媒体宣发</h3><span class="en">Self-media & Content</span></div>
+    <div class="sec-desc">以小红书为主阵地，用"没见过这么有活人味儿的问卷"等话题完成冷启动传播；长文内容、活动海报与账号矩阵持续输出品牌世界观。</div>
+    <div class="gal three rv">
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/eb4a4f8c2dd8483390abf7ed7493150b%2Fo%2F1789883933307-c.jpg?auth_key=1792637132-0-0-3c664b6bf41fcd651b01d494fac6fbbc" data-full="https://workspace-cdn.uzone.com/eb4a4f8c2dd8483390abf7ed7493150b%2Fo%2F1789883933307-c.jpg?auth_key=1792637132-0-0-3c664b6bf41fcd651b01d494fac6fbbc"><figcaption>账号内容矩阵 · 笔记合集</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/21206ed683d1477287e0bec4ce562ed0%2Fo%2F1789883934376-c.jpg?auth_key=1792637134-0-0-53df97a83de94c4394b7a89e8fb06513" data-full="https://workspace-cdn.uzone.com/21206ed683d1477287e0bec4ce562ed0%2Fo%2F1789883934376-c.jpg?auth_key=1792637134-0-0-53df97a83de94c4394b7a89e8fb06513"><figcaption>塔罗长文 · 世界观内容</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/5b9b3ac0166844d683daf2407a08751a%2Fo%2F1789883935935-c.jpg?auth_key=1792637135-0-0-dbaebce340ada1226a6ed2f42ce115be" data-full="https://workspace-cdn.uzone.com/5b9b3ac0166844d683daf2407a08751a%2Fo%2F1789883935935-c.jpg?auth_key=1792637135-0-0-dbaebce340ada1226a6ed2f42ce115be"><figcaption>主页运营 · 系列选题</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 产品项目 ============ -->
+<section class="view" id="prod">
+  <div class="page-head">
+    <div class="back" onclick="go('home')">← 返回</div>
+    <div class="kick">02 — PRODUCT & EXPERIENCE</div>
+    <h2>产品与体验</h2>
+    <div class="lead">四个产品项目：智慧养老方向的智能助老机器人与食愈手环、个护赛道的仿生按摩仪、面向儿童情感表达的 AI 手持影像设备"捕梦网"。从洞察、定义到展板与建模渲染。</div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">2.1</span><h3>智能助老机器人</h3><span class="en">Smart Elderly-Care Robot</span></div>
+    <div class="sec-desc">"守银龄福祉之正，创智慧养老之新"。面向居家老人的陪伴型智能机器人：健康管理、情感陪伴与安全监护一体化，以完整产品说明书体系定义功能、交互与服务流程。</div>
+    <div class="prod rv">
+      <div class="info">
+        <div class="tag">HEALTHCARE × ROBOTICS</div>
+        <h4>慧助夕阳 · 产品说明书</h4>
+        <div class="en">Product Manual System</div>
+        <p>从老人真实场景出发定义机器人能力边界：日常照护提醒、健康监测、紧急呼救与远程亲情连接；说明书体系覆盖功能、操作、安装与服务全链路。</p>
+        <div class="chips"><i>用户研究</i><i>功能定义</i><i>交互流程</i><i>说明书体系</i></div>
+      </div>
+    </div>
+    <div class="board rv">
+      <img src="https://workspace-cdn.uzone.com/6f80ea3477b54ffbb39f4cdf295ce8a7%2Fo%2F1789883567703-c.jpg?auth_key=1792637101-0-0-09a78281c56303cdfabcf361ea17ffaf" data-full="https://workspace-cdn.uzone.com/6f80ea3477b54ffbb39f4cdf295ce8a7%2Fo%2F1789883567703-c.jpg?auth_key=1792637101-0-0-09a78281c56303cdfabcf361ea17ffaf" loading="lazy">
+      <div class="cap">智能助老机器人 · 产品说明书全览（点击放大）</div>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">2.2</span><h3>食愈手环 · 智能助老穿戴</h3><span class="en">NourishBand</span></div>
+    <div class="sec-desc">围绕进食看护与营养管理的老年智能穿戴：以"食愈"为核心概念，构建监测模块、适老化交互与佩戴形态的系列化设计，并以展板完成概念—功能—场景的完整叙事。</div>
+    <div class="board rv">
+      <img src="https://workspace-cdn.uzone.com/7307ec337f464cc2abacbec768850eaa%2Fo%2F1789883568904-c.jpg?auth_key=1792637102-0-0-fca97f859396b6cfe1de31ff35c11fd9" data-full="https://workspace-cdn.uzone.com/7307ec337f464cc2abacbec768850eaa%2Fo%2F1789883568904-c.jpg?auth_key=1792637102-0-0-fca97f859396b6cfe1de31ff35c11fd9" loading="lazy">
+      <div class="cap">NourishBand 食愈手环 · 完整展板（点击放大）</div>
+    </div>
+    <div class="prod rv">
+      <div class="info">
+        <div class="tag">WEARABLE · SERIES DESIGN</div>
+        <h4>产品心智 × 系列化</h4>
+        <p>从单品到产品家族：功能分级、系列规划与适老化细节，让技术退后、关怀向前。</p>
+        <div class="chips"><i>产品定义</i><i>系列规划</i><i>展板设计</i></div>
+      </div>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">2.3</span><h3>Cuddle 仿生按摩仪</h3><span class="en">Bionic Massage Device · Smart Wearable</span></div>
+    <div class="sec-desc">基于章鱼触手仿生概念的放松按摩产品：柔性触手结构贴合身体曲线，配合情绪化交互语言，把"被拥抱"转译为可穿戴的智能硬件体验。</div>
+    <div class="board rv">
+      <img src="https://workspace-cdn.uzone.com/5590f0434bfe48f89d924d7455e837ee%2Fo%2F1789883909888-c.jpg?auth_key=1792637122-0-0-5d327f0dcb43571183466b08c7f71c23" data-full="https://workspace-cdn.uzone.com/5590f0434bfe48f89d924d7455e837ee%2Fo%2F1789883909888-c.jpg?auth_key=1792637122-0-0-5d327f0dcb43571183466b08c7f71c23" loading="lazy">
+      <div class="cap">Cuddle 仿生按摩仪 · 概念展板（点击放大）</div>
+    </div>
+    <div class="sec-h" style="margin-top:36px"><span class="idx">+</span><h3 style="font-size:18px">个护造型器 · 3D 建模表现</h3><span class="en">3D Modeling</span></div>
+    <div class="sec-desc" style="margin-bottom:22px">粉白配色的便携造型器：从形态推敲到材质与光影渲染，完成多视角产品建模表现。</div>
+    <div class="gal four rv">
+      <figure class="sq contain"><img src="https://workspace-cdn.uzone.com/421d5a5d97c44c318bcebeba0a2d1594%2Fo%2F1789883893310-c.jpg?auth_key=1792637118-0-0-476d085e7474ca2e7ada68af1a2d0b40" data-full="https://workspace-cdn.uzone.com/421d5a5d97c44c318bcebeba0a2d1594%2Fo%2F1789883893310-c.jpg?auth_key=1792637118-0-0-476d085e7474ca2e7ada68af1a2d0b40"><figcaption>造型棒 · 正视</figcaption></figure>
+      <figure class="sq contain"><img src="https://workspace-cdn.uzone.com/59348f3d5b774651a017422e3e8f193a%2Fo%2F1789883901870-c.jpg?auth_key=1792637119-0-0-87abc28923c22ce95b5e33283532ee22" data-full="https://workspace-cdn.uzone.com/59348f3d5b774651a017422e3e8f193a%2Fo%2F1789883901870-c.jpg?auth_key=1792637119-0-0-87abc28923c22ce95b5e33283532ee22"><figcaption>吹风机 · 正视</figcaption></figure>
+      <figure class="sq contain"><img src="https://workspace-cdn.uzone.com/b4df54fd80ff49d8b51c00deaa4baf36%2Fo%2F1789883902490-c.jpg?auth_key=1792637120-0-0-56b4dd948dd34769074e13f3fd2bab95" data-full="https://workspace-cdn.uzone.com/b4df54fd80ff49d8b51c00deaa4baf36%2Fo%2F1789883902490-c.jpg?auth_key=1792637120-0-0-56b4dd948dd34769074e13f3fd2bab95"><figcaption>吹风机 · 斜俯</figcaption></figure>
+      <figure class="sq contain"><img src="https://workspace-cdn.uzone.com/4eaa84d32ba54b2a93ede057d2427eef%2Fo%2F1789883903201-c.jpg?auth_key=1792637120-0-0-e2872d52770af9d80af86481bd39943c" data-full="https://workspace-cdn.uzone.com/4eaa84d32ba54b2a93ede057d2427eef%2Fo%2F1789883903201-c.jpg?auth_key=1792637120-0-0-e2872d52770af9d80af86481bd39943c"><figcaption>吹风机 · 背视</figcaption></figure>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">2.4</span><h3>捕梦网</h3><span class="en">Dreamcatcher · AI Camera for Kids</span></div>
+    <div class="concept rv">
+      <div class="l">
+        <div class="tag">CONCEPT · AI × CHILDREN</div>
+        <h4>捕梦网</h4>
+        <div class="en">Handheld AI Imaging Device</div>
+        <div class="chips"><i>概念设计</i><i>儿童向</i><i>AI 图像转化</i><i>情感记录</i></div>
+      </div>
+      <div class="r">
+        <p>一台给孩子使用的手持摄像转换机器：使用者拍下照片后，机器内置的 AI 模型会将其转化为富有童趣与美好的画面——普通瞬间被重新"翻译"成孩子眼中的奇妙世界。</p>
+        <p>以影像为媒介守护表达欲与想象力，让每一次按下快门都成为一份可收藏的童年礼物，打造幸福童年。</p>
+        <div class="flow">
+          <span>孩子拍下照片</span><i>→</i><span>内置 AI 模型转化</span><i>→</i><span>童趣美好画面</span><i>→</i><span>童年记忆收藏</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 视觉设计 ============ -->
+<section class="view" id="vis">
+  <div class="page-head">
+    <div class="back" onclick="go('home')">← 返回</div>
+    <div class="kick">03 — POSTER · BRANDING · PHOTOGRAPHY</div>
+    <h2>海报 · 品牌 · 影像</h2>
+    <div class="lead">三条线：排版与观念的海报实验、SheCrafts 品牌视觉系统、以及作为观看方式的摄影——包括 AI 工作流商业摄影与运动纪实。</div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">3.1</span><h3>海报设计</h3><span class="en">Poster Design</span></div>
+    <div class="sec-desc">从文化三联、杂志版式到品牌活动主视觉：字体排印、色彩情绪与观念表达的实验场。</div>
+    <div class="gal two rv">
+      <figure class="wide contain"><img src="https://workspace-cdn.uzone.com/a135f018a22c48c5ae5314f202a217a9%2Fo%2F1789883857264-c.jpg?auth_key=1792637110-0-0-a00713811bce293300677ee0b62a0bcd" data-full="https://workspace-cdn.uzone.com/a135f018a22c48c5ae5314f202a217a9%2Fo%2F1789883857264-c.jpg?auth_key=1792637110-0-0-a00713811bce293300677ee0b62a0bcd"><figcaption>文化三联海报 · 众心归 / 文明的终极形态 / SYMPHONIA COSMICA</figcaption></figure>
+      <figure class="wide contain"><img src="https://workspace-cdn.uzone.com/955842ab761a4bf78cdbcf25d961e5fb%2Fo%2F1790045115962-c.jpg?auth_key=1792637116-0-0-33bda4aa40eb798ce44f384735e22c3b" data-full="https://workspace-cdn.uzone.com/955842ab761a4bf78cdbcf25d961e5fb%2Fo%2F1790045115962-c.jpg?auth_key=1792637116-0-0-33bda4aa40eb798ce44f384735e22c3b"><figcaption>杂志内页版式 · Unexplained Stories</figcaption></figure>
+    </div>
+    <div class="gal four rv" style="margin-top:14px">
+      <figure class="p34 contain"><img src="https://workspace-cdn.uzone.com/7348593ab8f441ba932b69220e919224%2Fo%2F1789883306536-c.jpg?auth_key=1792637130-0-0-e685714bc6c2a116b37cd2b6723ece01" data-full="https://workspace-cdn.uzone.com/7348593ab8f441ba932b69220e919224%2Fo%2F1789883306536-c.jpg?auth_key=1792637130-0-0-e685714bc6c2a116b37cd2b6723ece01"><figcaption>拯救濒死：禁止平庸 · 活动海报</figcaption></figure>
+      <figure class="p34 contain"><img src="https://workspace-cdn.uzone.com/82aea9d348764dbe96925f4a49e0c715%2Fo%2F1789883306518-c.jpg?auth_key=1792637130-0-0-ceeccd44b7406b570475a683b6f13919" data-full="https://workspace-cdn.uzone.com/82aea9d348764dbe96925f4a49e0c715%2Fo%2F1789883306518-c.jpg?auth_key=1792637130-0-0-ceeccd44b7406b570475a683b6f13919"><figcaption>欲望漂流 Ver.5.0 · 主题海报</figcaption></figure>
+      <figure class="p34 contain"><img src="https://workspace-cdn.uzone.com/5e48f658e39c42948c60ddfafba8fc90%2Fo%2F1789883317512-c.jpg?auth_key=1792637131-0-0-33d766159747e40fe104344d1734c4dc" data-full="https://workspace-cdn.uzone.com/5e48f658e39c42948c60ddfafba8fc90%2Fo%2F1789883317512-c.jpg?auth_key=1792637131-0-0-33d766159747e40fe104344d1734c4dc"><figcaption>跨年 Dress Code · 粉色海报</figcaption></figure>
+      <figure class="p34 contain"><img src="https://workspace-cdn.uzone.com/2237b14a931246a8b4f4f40bac134d16%2Fo%2F1789883306393-c.jpg?auth_key=1792637115-0-0-5d50d1558ba88f79aa597e7a00dd751c" data-full="https://workspace-cdn.uzone.com/2237b14a931246a8b4f4f40bac134d16%2Fo%2F1789883306393-c.jpg?auth_key=1792637115-0-0-5d50d1558ba88f79aa597e7a00dd751c"><figcaption>魅爱幻力 · 文字网格海报</figcaption></figure>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">3.2</span><h3>品牌视觉系统 · SheCrafts</h3><span class="en">Brand VI & Packaging</span></div>
+    <div class="sec-desc">为 <b style="color:var(--gold2)">SheCrafts</b> 设计的品牌视觉与包装系统——一个帮助斯里兰卡地区贫困女性依靠手工作品获得收入与尊严的品牌。标志、辅助图形与包装延展围绕"手作温度"展开，让手艺被看见、让价值被传递。</div>
+    <div class="gal three rv">
+      <figure class="p34 contain"><img src="https://workspace-cdn.uzone.com/8fcac41713a54c2ea394bf3b821d8769%2Fo%2F1789883770079-c.jpg?auth_key=1792637108-0-0-1b4e53ff6b4341404c8ef82869713f4e" data-full="https://workspace-cdn.uzone.com/8fcac41713a54c2ea394bf3b821d8769%2Fo%2F1789883770079-c.jpg?auth_key=1792637108-0-0-1b4e53ff6b4341404c8ef82869713f4e"><figcaption>标志设计 · 图形语义</figcaption></figure>
+      <figure class="p34 contain"><img src="https://workspace-cdn.uzone.com/4bf34ce0799d4c5a823947ff7d767299%2Fo%2F1789883892073-c.jpg?auth_key=1792637111-0-0-ab1734915a6ce7848cb8033e5d0b17d0" data-full="https://workspace-cdn.uzone.com/4bf34ce0799d4c5a823947ff7d767299%2Fo%2F1789883892073-c.jpg?auth_key=1792637111-0-0-ab1734915a6ce7848cb8033e5d0b17d0"><figcaption>辅助图形 · Pattern 延展</figcaption></figure>
+      <figure class="p34 contain"><img src="https://workspace-cdn.uzone.com/e17bf2133add4c17bcc0c6fb232d2fd4%2Fo%2F1790045112374-c.jpg?auth_key=1792637112-0-0-f8c9285ee0245485fb5f4e1bd66dd44e" data-full="https://workspace-cdn.uzone.com/e17bf2133add4c17bcc0c6fb232d2fd4%2Fo%2F1790045112374-c.jpg?auth_key=1792637112-0-0-f8c9285ee0245485fb5f4e1bd66dd44e"><figcaption>包装系统 · 吊牌与盒型</figcaption></figure>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">3.3</span><h3>商业摄影 · 饮品与食物</h3><span class="en">Commercial Photography</span></div>
+    <div class="aibadge rv"><b>AI WORKFLOW</b><span>本系列采用 AI 工作流（Midjourney、GPT 等）生成图片，从概念到成片快速迭代，大幅提高生产效率。</span></div>
+    <div class="sec-desc">为品牌菜单产出的特调与餐食视觉：纯色背景、硬光与道具构成克制的商业静物语言；AI 生成 + 人工审校的工作流让风格一致性与产能同步提升。</div>
+    <div class="gal four rv">
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/45b0dfab408f4e18a186598164d36e4f%2Fo%2F1789883317430-c.jpg?auth_key=1792637122-0-0-f0150b037f65b32f6c247e27c75a0e70" data-full="https://workspace-cdn.uzone.com/45b0dfab408f4e18a186598164d36e4f%2Fo%2F1789883317430-c.jpg?auth_key=1792637122-0-0-f0150b037f65b32f6c247e27c75a0e70" loading="lazy"><figcaption>柠檬红茶特调</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/984b1064507840f9800635d9611df711%2Fo%2F1789883326188-c.jpg?auth_key=1792637123-0-0-97c48235c1e9f095c38e655b8afbe045" data-full="https://workspace-cdn.uzone.com/984b1064507840f9800635d9611df711%2Fo%2F1789883326188-c.jpg?auth_key=1792637123-0-0-97c48235c1e9f095c38e655b8afbe045" loading="lazy"><figcaption>玫瑰肉桂 · 紫调</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/e5733f774f704cefb38b5c234d057e2e%2Fo%2F1789883334194-c.jpg?auth_key=1792637123-0-0-b0b0538625e72b7e49b23728b255c584" data-full="https://workspace-cdn.uzone.com/e5733f774f704cefb38b5c234d057e2e%2Fo%2F1789883334194-c.jpg?auth_key=1792637123-0-0-b0b0538625e72b7e49b23728b255c584" loading="lazy"><figcaption>黑巧坚果 · 红调</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/47d11658bf5c42f6a392e13035cef60f%2Fo%2F1789883911535-c.jpg?auth_key=1792637124-0-0-f0ed5bf66b0bb34fa66e035bffd1e95f" data-full="https://workspace-cdn.uzone.com/47d11658bf5c42f6a392e13035cef60f%2Fo%2F1789883911535-c.jpg?auth_key=1792637124-0-0-f0ed5bf66b0bb34fa66e035bffd1e95f" loading="lazy"><figcaption>西柚气泡</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/9384d9d8c14b449fa344bc2a7f4c2dfe%2Fo%2F1789883317373-c.jpg?auth_key=1792637125-0-0-6a57a4405070a2d3ff78943df1f03a67" data-full="https://workspace-cdn.uzone.com/9384d9d8c14b449fa344bc2a7f4c2dfe%2Fo%2F1789883317373-c.jpg?auth_key=1792637125-0-0-6a57a4405070a2d3ff78943df1f03a67" loading="lazy"><figcaption>粉色奶沫</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/7b1602262c0d4f419caba326dd96ed69%2Fo%2F1789883326187-c.jpg?auth_key=1792637126-0-0-dda6872cd649f2a280b50611c6318e57" data-full="https://workspace-cdn.uzone.com/7b1602262c0d4f419caba326dd96ed69%2Fo%2F1789883326187-c.jpg?auth_key=1792637126-0-0-dda6872cd649f2a280b50611c6318e57" loading="lazy"><figcaption>PLAY DIRTY · 奶沫字</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/01c50811ee5249eda54a94d2820bd65b%2Fo%2F1789883350583-c.jpg?auth_key=1792637339-0-0-d32568aa90a6b2081fb6c5021a24fee1" data-full="https://workspace-cdn.uzone.com/01c50811ee5249eda54a94d2820bd65b%2Fo%2F1789883350583-c.jpg?auth_key=1792637339-0-0-d32568aa90a6b2081fb6c5021a24fee1" loading="lazy"><figcaption>蓝色高球</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/bb405327a0814a6bb8bcaa84fcb1ee6a%2Fo%2F1789883294493-c.jpg?auth_key=1792637127-0-0-d2e2b65e3451d616c647efcdb53a4f80" data-full="https://workspace-cdn.uzone.com/bb405327a0814a6bb8bcaa84fcb1ee6a%2Fo%2F1789883294493-c.jpg?auth_key=1792637127-0-0-d2e2b65e3451d616c647efcdb53a4f80" loading="lazy"><figcaption>甜品盘 · HUNGRY?</figcaption></figure>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="idx">3.4</span><h3>纪实摄影 · 运动与空间</h3><span class="en">Documentary Photography</span></div>
+    <div class="sec-desc">拳馆里的汗与光：运动纪实以抓拍记录身体、节奏与情绪的真实瞬间；空间与静物则记录光、物与氛围的关系。</div>
+    <div class="gal four rv">
+      <figure class="wide"><img src="https://workspace-cdn.uzone.com/b994127bf70a48a99ed50da7a7ad1f08%2Fo%2F1789883579443-c.jpg?auth_key=1792644995-0-0-2d2027d1affe5a6e7cea4c6223999428" data-full="https://workspace-cdn.uzone.com/b994127bf70a48a99ed50da7a7ad1f08%2Fo%2F1789883579443-c.jpg?auth_key=1792644995-0-0-2d2027d1affe5a6e7cea4c6223999428" loading="lazy"><figcaption>对练 · 万国旗下的拳台</figcaption></figure>
+      <figure class="wide"><img src="https://workspace-cdn.uzone.com/01f1a84b2d3c4a618b51e6d926e85d85%2Fo%2F1789883570026-c.jpg?auth_key=1792644994-0-0-69b1e1527cf4190a3f3eaec37e24d447" data-full="https://workspace-cdn.uzone.com/01f1a84b2d3c4a618b51e6d926e85d85%2Fo%2F1789883570026-c.jpg?auth_key=1792644994-0-0-69b1e1527cf4190a3f3eaec37e24d447" loading="lazy"><figcaption>镜前空击 · 训练馆</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/c7142178e70e4544ae864c6e43abdbd6%2Fo%2F1789883910924-c.jpg?auth_key=1792644997-0-0-eeb0ce122b61f357a9c61cfa54d15165" data-full="https://workspace-cdn.uzone.com/c7142178e70e4544ae864c6e43abdbd6%2Fo%2F1789883910924-c.jpg?auth_key=1792644997-0-0-eeb0ce122b61f357a9c61cfa54d15165" loading="lazy"><figcaption>教练指导 · 拳台边</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/35a21e9520ec403e87ad458f6efc0ffa%2Fo%2F1789883923821-c.jpg?auth_key=1792644997-0-0-7b2a54382c7e09ed24a21655738419e7" data-full="https://workspace-cdn.uzone.com/35a21e9520ec403e87ad458f6efc0ffa%2Fo%2F1789883923821-c.jpg?auth_key=1792644997-0-0-7b2a54382c7e09ed24a21655738419e7" loading="lazy"><figcaption>红角 · 备战瞬间</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/04778c14dde54f4a85201439ccee6b6e%2Fo%2F1789883580122-c.jpg?auth_key=1792644996-0-0-001a1466e19f6769e03238b037cad423" data-full="https://workspace-cdn.uzone.com/04778c14dde54f4a85201439ccee6b6e%2Fo%2F1789883580122-c.jpg?auth_key=1792644996-0-0-001a1466e19f6769e03238b037cad423" loading="lazy"><figcaption>场边 · 拳套架前的笑容</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/b2ef83d2438a4e4f86b4e8055b88c69b%2Fo%2F1789883558208-c.jpg?auth_key=1792637100-0-0-0996bd6cd34b17119623e8b0307f3370" data-full="https://workspace-cdn.uzone.com/b2ef83d2438a4e4f86b4e8055b88c69b%2Fo%2F1789883558208-c.jpg?auth_key=1792637100-0-0-0996bd6cd34b17119623e8b0307f3370" loading="lazy"><figcaption>白花与五线谱墙 · 静物</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/723028d5e2d94c11b6031023e15e722d%2Fo%2F1789883855756-c.jpg?auth_key=1792637109-0-0-6d65e78cd96110489daa997bc8d66b0c" data-full="https://workspace-cdn.uzone.com/723028d5e2d94c11b6031023e15e722d%2Fo%2F1789883855756-c.jpg?auth_key=1792637109-0-0-6d65e78cd96110489daa997bc8d66b0c" loading="lazy"><figcaption>吉他装置 · 展览空间</figcaption></figure>
+      <figure class="p34"><img src="https://workspace-cdn.uzone.com/f259bf9965124c0b85c7d5d301cbec03%2Fo%2F1789883872667-c.jpg?auth_key=1792637111-0-0-e1599909cb0d13b7ca838449fdedb87f" data-full="https://workspace-cdn.uzone.com/f259bf9965124c0b85c7d5d301cbec03%2Fo%2F1789883872667-c.jpg?auth_key=1792637111-0-0-e1599909cb0d13b7ca838449fdedb87f" loading="lazy"><figcaption>琴与绿植 · 音乐现场</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div id="foot">
+  <div class="fm">荆荣婕 · Portfolio</div>
+  <p>BRAND × PRODUCT × VISUAL &nbsp;·&nbsp; XI'AN JIAOTONG UNIVERSITY</p>
+</div>
+
+<div id="lb"><img id="lbimg"><div class="cap" id="lbcap"></div></div>
+
+<script>
+function go(v){
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id===v));
+  document.querySelectorAll('#nav span').forEach(s=>s.classList.toggle('on',s.dataset.v===v));
+  window.scrollTo({top:0,behavior:'instant'});
+  requestAnimationFrame(reveal);
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+function reveal(){document.querySelectorAll('.rv:not(.in)').forEach(el=>io.observe(el));}
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+const lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),lbcap=document.getElementById('lbcap');
+document.addEventListener('click',e=>{
+  const t=e.target.closest('img[data-full]');
+  if(!t)return;
+  lbimg.src=t.getAttribute('data-full');
+  const cap=t.closest('figure')?.querySelector('figcaption')||t.closest('.board')?.querySelector('.cap');
+  lbcap.textContent=cap?cap.textContent:'';
+  lb.classList.add('on');
+});
+lb.addEventListener('click',()=>lb.classList.remove('on'));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on');});
+</script>
+</body>
+</html>
